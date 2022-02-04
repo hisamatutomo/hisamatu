@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>情報とマルチメディア</title>
+    <link rel="stylesheet" href="lec9_kadai_2119092.css" />
+  </head>
+
+  <body>
+    <div id="all">
+      <header>
+        <img src="logo.png" alt="ロゴ" width="800" />
+      </header>
+
+      <main>
+        <h1><a>第13回課題</a></h1>
+        <form name="myform" method="get" action="">
+          <h2>お問合せフォーム</h2>
+
+          <fieldset>
+            <legend>お問合せ</legend>
+            <p>
+              名前<br />
+              <input
+                type="text"
+                name="familyname"
+                placeholder="姓"
+                id="onfocus1"
+              />
+              <input
+                type="text"
+                name="name"
+                placeholder="名"
+                id="onfocus2"
+              />
+            </p>
+            <p>学籍番号：<input type="text" placeholder="2119092" /></p>
+            <p>
+              学年：
+              <select name="time">
+                <option value="1">1年</option>
+                <option value="2">2年</option>
+                <option value="3">3年</option>
+                <option value="4">4年</option>
+              </select>
+            </p>
+            <p>
+              メールアドレス：<input
+                type="email"
+                name="email"
+                placeholder="exam@ed.tus.ac.jp"
+                id="oncopy"
+              /><br />
+              (確認用)：<input
+                type="email"
+                name="emailconf"
+                placeholder="exam@ed.tus.ac.jp"
+                id="onpaste"
+              />
+            </p>
+            <p>
+              性別
+              <input type="radio" name="hardness" value="1" id="q2_1" /><label
+                for="q2_1"
+                >男</label
+              >
+              <input type="radio" name="hardness" value="2" id="q2_2" /><label
+                for="q2_2"
+                >女</label
+              >
+            </p>
+            <p>
+              わからなかった内容<br />
+              <input type="checkbox" name="interest" value="1" id="tag" />
+              <label for="tag">タグの使い方</label><br />
+              <input type="checkbox" name="interest" value="2" id="css" />
+              <label for="css">cssファイルの書き方</label><br />
+              <input type="checkbox" name="interest" value="3" id="form" />
+              <label for="form">フォームの書き方</label><br />
+            </p>
+            <p>
+              質問内容<br />
+              <textarea
+                name="comments"
+                cols="100"
+                rows="10"
+                placeholder="自由に質問を書いてください"
+                id="onmouseover"
+              >
+              </textarea>
+            </fieldset>
+
+            <p>
+              <button type="submit" id="sending_button">送信</button>
+            </p>
+          </fieldset>
+        </form>
+      </main>
+
+      <footer>
+        <p>久末寛矩(2119092@ed.tus.ac.jp）</p>
+      </footer>
+
+      <script>
+        const onfocus1 = document.getElementById("onfocus1");
+        onfocus1.addEventListener("focus", focus1);
+        function focus1() {
+          event.target.style.backgroundColor = "lightblue";
+        }
+        onfocus1.addEventListener("blur", blur1);
+
+        function blur1() {
+          event.target.style.backgroundColor = "white";
+        }
+        const onfocus2 = document.getElementById("onfocus2");
+
+        onfocus2.addEventListener("focus", focus1);
+        onfocus2.addEventListener("blur", blur1);
+
+        const oncopy = document.getElementById("oncopy");
+        oncopy.addEventListener("copy", notcopy);
+
+        function notcopy() {
+          alert("その操作はできません");
+          event.preventDefault();
+        }
+
+        const onpaste = document.getElementById("onpaste");
+        onpaste.addEventListener("paste", notpaste);
+        function notpaste() {
+          alert("その操作はできません");
+          event.preventDefault();
+        }
+        const onmouseover = document.getElementById("onmouseover");
+        onmouseover.addEventListener("mouseover", big);
+        function big() {
+          event.target.style.border = "3px dotted red";
+        }
+        onmouseover.addEventListener("mouseout", small);
+        function small() {
+          event.target.style.border = "1px solid black";
+        }
+        const sending_button = document.getElementById("sending_button");
+        sending_button.addEventListener("click", check);
+        function check(){
+          const name  = document.getElementById("onfocus1");
+          const name2 = document.getElementById("onfocus2");
+          const email = document.getElementById("oncopy");
+          const emailconf = document.getElementById("onpaste");
+          let flag = 0
+          if (name.value == ""){
+            alert("姓を入力してください");
+            name.style.backgroundColor="lightpink";
+            event.preventDefault();
+            flag ++;
+          };
+          if (name2.value == ""){
+            alert("名を入力してください");
+            name2.style.backgroundColor="lightpink";
+            event.preventDefault();
+            flag ++;
+          };
+          if (email.value == ""){
+            alert("Eメールを入力してください");
+            email.style.backgroundColor="lightpink";
+            event.preventDefault();
+            flag ++;
+          } else if (email.value != emailconf.value){
+            alert("Eメールが一致しません");
+            email.style.backgroundColor="lightpink";
+            emailconf.style.backgroundColor="lightpink";
+            event.preventDefault();
+            flag ++;
+          };
+          if(flag == 0){
+            alert("thank you!");
+          };
+        };
+      </script>
+    </div>
+  </body>
+</html>
